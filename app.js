@@ -31,3 +31,21 @@ var xScale = d3.scale.linear()
 	.range([0, width]);
 var yScale = d3.scale.linear()
 	.range([height, 0]);
+
+xScale.domain([
+		d3.min(hubble_data, function(nebulae) {
+			return nebulae.distance - nebulae.distance_error;
+		}),
+		d3.max(hubble_data, function(nebulae) {
+			return nebulae.distance + nebulae.distance_error;
+		});
+	]).nice();
+
+yScale.domain([
+		d3.min(hubble_data, function (nebulae) {
+			return nebulae.velocity - nebulae.velocity_error;
+		}),
+		d3.max(hubble_data, function (nebulae) {
+			return nebulae.velocity + nebulae.velocity_error;
+		});
+	]).nice();
